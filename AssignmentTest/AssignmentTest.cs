@@ -10,9 +10,22 @@ namespace AssignmentTest
         {
             // Chest starts in the locked state
             TreasureChest chest = new TreasureChest(TreasureChest.State.Locked);
+
             // Try to open the chest
-            // Verify chest is still locked
             chest.Open();
+            Assert.AreEqual(chest.GetState(), TreasureChest.State.Locked);
+
+            // Unlock the chest
+            chest.Unlock();
+            chest.Open();
+            Assert.AreEqual(chest.GetState(), TreasureChest.State.Open);
+
+            // Close the chest
+            chest.Close();
+            Assert.AreEqual(chest.GetState(), TreasureChest.State.Closed);
+
+            // Lock the chest
+            chest.Lock();
             Assert.AreEqual(chest.GetState(), TreasureChest.State.Locked);
         }
 
@@ -21,8 +34,19 @@ namespace AssignmentTest
         {
             // Create a new chest that is in the closed state
             TreasureChest chest = new TreasureChest(TreasureChest.State.Closed);
+
+            // Unlock the chest
+            chest.Unlock();
             chest.Open();
             Assert.AreEqual(chest.GetState(), TreasureChest.State.Open);
+
+            // Close the chest
+            chest.Close();
+            Assert.AreEqual(chest.GetState(), TreasureChest.State.Closed);
+
+            // Lock the chest
+            chest.Lock();
+            Assert.AreEqual(chest.GetState(), TreasureChest.State.Locked);
         }
 
         [TestMethod]
@@ -30,6 +54,17 @@ namespace AssignmentTest
         {
             // Create a new chest that is in the open state
             TreasureChest chest = new TreasureChest(TreasureChest.State.Open);
+
+            // Close the chest
+            chest.Close();
+            Assert.AreEqual(chest.GetState(), TreasureChest.State.Closed);
+
+            // Lock the chest
+            chest.Lock();
+            Assert.AreEqual(chest.GetState(), TreasureChest.State.Locked);
+
+            // Unlock the chest
+            chest.Unlock();
             chest.Open();
             Assert.AreEqual(chest.GetState(), TreasureChest.State.Open);
         }
